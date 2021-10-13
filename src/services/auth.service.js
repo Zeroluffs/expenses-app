@@ -3,8 +3,9 @@ import axios from "axios";
 const API_URL = "http://localhost:3000/api/users";
 
 const login = (username, password) => {
+    console.log(password)
   return axios
-    .post(API_URL + "/login", {
+    .post(API_URL, {
       username,
       password,
     })
