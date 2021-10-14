@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form } from "semantic-ui-react";
 import { login } from "../slices/auth";
+import { AuthContext } from "../context/auth";
+import axios from "axios";
 
+const api = axios.create({
+  baseURL: `http://localhost:3000/api`,
+});
 export function Login() {
+  const context = useContext(AuthContext);
+
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -27,15 +34,25 @@ export function Login() {
     };
     setLoading(true);
 
-    dispatch(login(userInfo.username, userInfo.password))
-      .unwrap()
-      .then(() => {
-        // props.history.push("/profile");
-        // window.location.reload();
-        console.log("worked");
+    api
+      .post("/users/login", userInfo)
+      .then((res) => {
+        if (res.status === 200) {
+          const loggedUser = {
+            username: res.data.user.username,
+            token: res.data.token,
+            expenses: res.data.user.expenses,
+          };
+          console.log(loggedUser);
+          context.login(loggedUser);
+        } else {
+          const error = new Error(res.error);
+          throw error;
+        }
       })
-      .catch(() => {
-        setLoading(false);
+      .catch((err) => {
+        console.log(err);
+        alert("Error Logging in please try again");
       });
   };
   return (
