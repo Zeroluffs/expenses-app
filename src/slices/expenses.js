@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const api = axios.create({
-  baseURL: `http://localhost:3000/api/expenses/`,
+  baseURL: `http://localhost:3000/api/`,
 });
 
 const initialState = {
@@ -10,4 +10,38 @@ const initialState = {
   error: null,
 };
 
+export const fetchExpenses = createAsyncThunk(
+  "expenses/fetchExpenses",
+  async (userID) => {
+    const response = await api.get("expenses/" + userID);
+    return response.data;
+  }
+);
 
+const expensesSlice = createSlice({
+  name: "expenses",
+  initialState,
+  reducers: {
+    reset(state) {
+      Object.assign(state, initialState);
+    },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchExpenses.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchExpenses.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.expenses = state.expenses.concat(action.payload);
+      })
+      .addCase(fetchExpenses.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+  },
+});
+
+export default expensesSlice.reducer;
+export const { reset } = expensesSlice.actions;
+export const selectAllExpenses = (state) => state.expenses.expenses;
