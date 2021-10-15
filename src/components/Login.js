@@ -4,11 +4,12 @@ import { Button, Form } from "semantic-ui-react";
 import { login } from "../slices/auth";
 import { AuthContext } from "../context/auth";
 import axios from "axios";
-
+import { useHistory } from "react-router-dom";
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
 });
 export function Login() {
+  const history = useHistory();
   const context = useContext(AuthContext);
 
   const [errors, setErrors] = useState({});
@@ -43,8 +44,11 @@ export function Login() {
             token: res.data.token,
             expenses: res.data.user.expenses,
           };
-          console.log(loggedUser);
           context.login(loggedUser);
+          console.log("made it ");
+          history.push({
+            pathname: `/mainpage`,
+          });
         } else {
           const error = new Error(res.error);
           throw error;

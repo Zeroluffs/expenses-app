@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Budget } from "../components/Budget";
 import { Remaining } from "../components/Remaining";
 import { Spent } from "../components/Spent";
@@ -6,7 +6,19 @@ import Grid from "@mui/material/Grid";
 import { ExpensesList } from "../components/ExpensesList";
 import { AddExpenseForm } from "../components/AddExpenseForm";
 import { NavigationBar } from "../components/NavigationBar";
+import { AuthContext } from "../context/auth";
+import jwt_decode from "jwt-decode";
+
 export function MainPage() {
+  console.log("hello");
+  const user = useContext(AuthContext);
+  useEffect(() => {
+    console.log("hello world");
+    console.log(user.user.token);
+    var decoded = jwt_decode(user.user.token);
+    console.log(decoded);
+  }, []);
+
   return (
     <Fragment>
       <Grid justifyContent="center" container spacing={1}>
