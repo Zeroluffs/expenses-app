@@ -18,6 +18,14 @@ export const fetchExpenses = createAsyncThunk(
   }
 );
 
+export const addExpense = createAsyncThunk(
+  "expenses/addExpense",
+  async (userID, body) => {
+    const response = await api.post("expenses/" + userID, body);
+    return response.data;
+  }
+);
+
 const expensesSlice = createSlice({
   name: "expenses",
   initialState,
@@ -38,6 +46,9 @@ const expensesSlice = createSlice({
       .addCase(fetchExpenses.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(addExpense.fulfilled, (state, action) => {
+        state.expenses.push(action.payload);
       });
   },
 });
