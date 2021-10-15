@@ -8,8 +8,11 @@ import { AddExpenseForm } from "../components/AddExpenseForm";
 import { NavigationBar } from "../components/NavigationBar";
 import { AuthContext } from "../context/auth";
 import jwt_decode from "jwt-decode";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchExpenses } from "../slices/expenses";
 export function MainPage() {
+  const dispatch = useDispatch();
+
   console.log("hello");
   const user = useContext(AuthContext);
   useEffect(() => {
@@ -17,6 +20,8 @@ export function MainPage() {
     console.log(user.user.token);
     var decoded = jwt_decode(user.user.token);
     console.log(decoded);
+    const response = dispatch(fetchExpenses(decoded.id)).unwrap();
+    console.log(response);
   }, []);
 
   return (

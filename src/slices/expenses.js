@@ -1,3 +1,4 @@
+import { CollectionsBookmarkOutlined } from "@mui/icons-material";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const api = axios.create({
@@ -13,6 +14,7 @@ const initialState = {
 export const fetchExpenses = createAsyncThunk(
   "expenses/fetchExpenses",
   async (userID) => {
+    console.log("fetching");
     const response = await api.get("expenses/" + userID);
     return response.data;
   }
