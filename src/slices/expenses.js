@@ -22,9 +22,24 @@ export const fetchExpenses = createAsyncThunk(
 
 export const addExpense = createAsyncThunk(
   "expenses/addExpense",
-  async (userID, body) => {
-    const response = await api.post("expenses/" + userID, body);
+  async (obj) => {
+    console.log("here");
+    console.log(obj);
+    let body = {
+      name: obj.name,
+      cost: obj.cost,
+      type: obj.type,
+    };
+    console.log(obj.userID);
+    const response = await api.post("expenses/" + obj.userID, body);
     return response.data;
+  }
+);
+export const deleteExpense = createAsyncThunk(
+  "expenses/deleteExpense",
+  async (obj) => {
+    await api.delete("expenses/" + obj.userID + "/" + obj.expenseID);
+    return obj.expenseID;
   }
 );
 
@@ -51,6 +66,12 @@ const expensesSlice = createSlice({
       })
       .addCase(addExpense.fulfilled, (state, action) => {
         state.expenses.push(action.payload);
+      })
+      .addCase(deleteExpense.fulfilled, (state, action) => {
+        let index = state.expenses.findIndex(
+          ({ id }) => id === action.payload.expenseID
+        );
+        state.expenses.splice(index, 1);
       });
   },
 });

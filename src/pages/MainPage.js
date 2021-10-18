@@ -10,6 +10,7 @@ import { AuthContext } from "../context/auth";
 import jwt_decode from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExpenses } from "../slices/expenses";
+import { ExpensesGrid } from "../components/ExpensesGrid";
 export function MainPage() {
   const dispatch = useDispatch();
 
@@ -38,7 +39,7 @@ export function MainPage() {
         </Grid>
       </Grid>
       <AddExpenseForm />
-      <ExpensesList></ExpensesList>
+      <ExpensesGrid></ExpensesGrid>
       <NavigationBar></NavigationBar>
     </Fragment>
   );

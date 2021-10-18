@@ -1,0 +1,4 @@
+.expenseForm {
+  display: flex;
+  flex-direction: column;
+}
