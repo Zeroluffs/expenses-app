@@ -20,9 +20,7 @@ export function ExpensesGrid() {
       const apiCall = async (expenseID) => {
         try {
           console.log("deleting");
-          console.log(id);
           const response = await dispatch(deleteExpense(expenseID)).unwrap();
-          // console.log(response);
         } catch (error) {
           console.log(error);
         }

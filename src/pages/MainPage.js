@@ -16,11 +16,8 @@ export function MainPage() {
 
   const user = useContext(AuthContext);
   useEffect(() => {
-    console.log(user.user.token);
     var decoded = jwt_decode(user.user.token);
-    console.log(decoded);
     const response = dispatch(fetchExpenses()).unwrap();
-    console.log(response);
   }, []);
 
   return (

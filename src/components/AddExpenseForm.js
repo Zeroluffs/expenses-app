@@ -12,18 +12,20 @@ import jwt_decode from "jwt-decode";
 import "../styles/expenseForm/expenseForm.css";
 
 export function AddExpenseForm() {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(1);
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const context = useContext(AuthContext);
 
   const onSubmit = async () => {
-    const expense = {
-      name: name,
-      cost: value,
-      type: "sub",
-    };
-    apiCall(expense);
+    if ((name.length > 0) & (value > 0)) {
+      const expense = {
+        name: name,
+        cost: value,
+        type: "sub",
+      };
+      apiCall(expense);
+    }
   };
   async function apiCall(body) {
     try {
@@ -34,6 +36,8 @@ export function AddExpenseForm() {
       };
 
       const response = await dispatch(addExpense(expense)).unwrap();
+      setValue(1);
+      setName("");
     } catch (error) {
       console.log(error);
     }
@@ -58,7 +62,11 @@ export function AddExpenseForm() {
           onChange={(event) => setName(event.target.value)}
           variant="standard"
         />
-        <Button onClick={onSubmit} variant="outlined">
+        <Button
+          disabled={name.length > 0 ? false : true}
+          onClick={onSubmit}
+          variant="outlined"
+        >
           Add Expense
         </Button>
       </FormControl>
