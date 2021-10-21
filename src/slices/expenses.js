@@ -2,7 +2,6 @@ import { CollectionsBookmarkOutlined } from "@mui/icons-material";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import expenseService from "../services/expense.service";
 
-
 const initialState = {
   expenses: [],
   status: "idle",
@@ -40,6 +39,17 @@ const expensesSlice = createSlice({
     reset(state) {
       Object.assign(state, initialState);
     },
+    expenseUpdated(state, action) {
+      const { name, cost, type, _id } = action.payload;
+      const existingExpense = state.expenses.find(
+        (expense) => expense._id === _id
+      );
+      if (existingExpense) {
+        existingExpense.name = name;
+        existingExpense.cost = cost;
+        existingExpense.type = type;
+      }
+    },
   },
   extraReducers(builder) {
     builder
@@ -70,5 +80,5 @@ const expensesSlice = createSlice({
 });
 
 export default expensesSlice.reducer;
-export const { reset } = expensesSlice.actions;
+export const { reset, expenseUpdated } = expensesSlice.actions;
 export const selectAllExpenses = (state) => state.expenses.expenses;
