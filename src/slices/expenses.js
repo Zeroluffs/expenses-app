@@ -37,9 +37,11 @@ export const addExpense = createAsyncThunk(
 );
 export const deleteExpense = createAsyncThunk(
   "expenses/deleteExpense",
-  async (obj) => {
-    await api.delete("expenses/" + obj.userID + "/" + obj.expenseID);
-    return obj.expenseID;
+  async (object) => {
+    var response = await api.delete(
+      "expenses/" + object.userID + "/" + object._id
+    );
+    return response.data;
   }
 );
 
@@ -68,10 +70,21 @@ const expensesSlice = createSlice({
         state.expenses.push(action.payload);
       })
       .addCase(deleteExpense.fulfilled, (state, action) => {
-        let index = state.expenses.findIndex(
-          ({ id }) => id === action.payload.expenseID
+        // let index = state.expenses.findIndex(
+        //   ({ id }) => id === action.payload
+        // );
+        // state.expenses.splice(index, 1);
+        // console.log("deleteExpense");
+        // console.log(action.payload, "hi");
+        // console.log(state.expenses);
+        // console.log(state);
+        state.expenses = state.expenses.filter(
+          ({ id }) => id !== action.payload
         );
-        state.expenses.splice(index, 1);
+        state.expenses.splice(
+          state.expenses.findIndex((arrow) => arrow._id === action.payload),
+          1
+        );
       });
   },
 });

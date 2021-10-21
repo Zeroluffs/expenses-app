@@ -18,21 +18,32 @@ const rows = [
 export function ExpensesGrid() {
   const dispatch = useDispatch();
 
-  const [data, setData] = useState([]);
   const test = useSelector(selectAllExpenses);
+  const [data, setData] = useState([]);
   const deleteUser = useCallback(
     (id) => () => {
       // console.log(id);
-      let obj = {
-        userID: id.userID,
-        expenseID: id._id,
+
+      console.log("to delete");
+      console.log(id);
+      // console.log(id.userID, id._id);
+      const apiCall = async (id) => {
+        try {
+          const response = await dispatch(deleteExpense(id)).unwrap();
+          // console.log(response);
+        } catch (error) {
+          console.log(error);
+        }
       };
-      apiCall(obj);
+      apiCall(id);
       // console.log(response);
       // console.log(obj);
     },
     []
   );
+  useEffect(() => {
+    setData(test);
+  }, [test]);
   const columns = [
     { field: "name", headerName: "Name", width: 200 },
     { field: "cost", headerName: "Cost", width: 200 },
@@ -51,14 +62,14 @@ export function ExpensesGrid() {
     [deleteUser],
   ];
 
-  async function apiCall(obj) {
-    try {
-      const response = await dispatch(deleteExpense(obj)).unwrap();
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // async function apiCall(obj) {
+  //   try {
+  //     const response = await dispatch(deleteExpense(obj)).unwrap();
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   return (
     <div style={{ height: 300, width: "100%" }}>
