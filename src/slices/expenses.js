@@ -70,14 +70,6 @@ const expensesSlice = createSlice({
         state.expenses.push(action.payload);
       })
       .addCase(deleteExpense.fulfilled, (state, action) => {
-        // let index = state.expenses.findIndex(
-        //   ({ id }) => id === action.payload
-        // );
-        // state.expenses.splice(index, 1);
-        // console.log("deleteExpense");
-        // console.log(action.payload, "hi");
-        // console.log(state.expenses);
-        // console.log(state);
         state.expenses = state.expenses.filter(
           ({ id }) => id !== action.payload
         );

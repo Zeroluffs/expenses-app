@@ -9,11 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { selectAllExpenses } from "../slices/expenses";
 import { deleteExpense } from "../slices/expenses";
-const rows = [
-  { id: 1, col1: "Hello", col2: "World" },
-  { id: 2, col1: "DataGridPro", col2: "is Awesome" },
-  { id: 3, col1: "MUI", col2: "is Amazing" },
-];
 
 export function ExpensesGrid() {
   const dispatch = useDispatch();
@@ -22,11 +17,8 @@ export function ExpensesGrid() {
   const [data, setData] = useState([]);
   const deleteUser = useCallback(
     (id) => () => {
-      // console.log(id);
-
       console.log("to delete");
       console.log(id);
-      // console.log(id.userID, id._id);
       const apiCall = async (id) => {
         try {
           const response = await dispatch(deleteExpense(id)).unwrap();
@@ -36,8 +28,6 @@ export function ExpensesGrid() {
         }
       };
       apiCall(id);
-      // console.log(response);
-      // console.log(obj);
     },
     []
   );
@@ -61,15 +51,6 @@ export function ExpensesGrid() {
     },
     [deleteUser],
   ];
-
-  // async function apiCall(obj) {
-  //   try {
-  //     const response = await dispatch(deleteExpense(obj)).unwrap();
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
 
   return (
     <div style={{ height: 300, width: "100%" }}>
