@@ -17,17 +17,17 @@ export function ExpensesGrid() {
   const [data, setData] = useState([]);
   const deleteUser = useCallback(
     (id) => () => {
-      console.log("to delete");
-      console.log(id);
-      const apiCall = async (id) => {
+      const apiCall = async (expenseID) => {
         try {
-          const response = await dispatch(deleteExpense(id)).unwrap();
+          console.log("deleting");
+          console.log(id);
+          const response = await dispatch(deleteExpense(expenseID)).unwrap();
           // console.log(response);
         } catch (error) {
           console.log(error);
         }
       };
-      apiCall(id);
+      apiCall(id._id);
     },
     []
   );

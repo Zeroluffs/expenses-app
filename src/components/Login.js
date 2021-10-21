@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form } from "semantic-ui-react";
-import { login } from "../slices/auth";
 import { AuthContext } from "../context/auth";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -45,7 +44,6 @@ export function Login() {
             expenses: res.data.user.expenses,
           };
           context.login(loggedUser);
-          console.log("made it ");
           history.push({
             pathname: `/mainpage`,
           });

@@ -18,24 +18,22 @@ export function AddExpenseForm() {
   const context = useContext(AuthContext);
 
   const onSubmit = async () => {
-    const decoded = jwt_decode(context.user.token);
     const expense = {
       name: name,
       cost: value,
       type: "sub",
     };
-    apiCall(decoded.id, expense);
+    apiCall(expense);
   };
-  async function apiCall(userID, body) {
+  async function apiCall(body) {
     try {
-      let obj = {
-        userID: userID,
+      let expense = {
         name: body.name,
         cost: body.cost,
         type: body.type,
       };
-      console.log(obj);
-      const response = await dispatch(addExpense(obj)).unwrap();
+
+      const response = await dispatch(addExpense(expense)).unwrap();
     } catch (error) {
       console.log(error);
     }

@@ -1,6 +1,5 @@
 import React from "react";
 import logo from "./logo.svg";
-import { Counter } from "./features/counter/Counter";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
 import { MainPage } from "./pages/MainPage";

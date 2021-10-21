@@ -14,14 +14,12 @@ import { ExpensesGrid } from "../components/ExpensesGrid";
 export function MainPage() {
   const dispatch = useDispatch();
 
-  console.log("hello");
   const user = useContext(AuthContext);
   useEffect(() => {
-    console.log("hello world");
     console.log(user.user.token);
     var decoded = jwt_decode(user.user.token);
     console.log(decoded);
-    const response = dispatch(fetchExpenses(decoded.id)).unwrap();
+    const response = dispatch(fetchExpenses()).unwrap();
     console.log(response);
   }, []);
 

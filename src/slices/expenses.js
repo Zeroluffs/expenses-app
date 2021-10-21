@@ -1,9 +1,7 @@
 import { CollectionsBookmarkOutlined } from "@mui/icons-material";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-const api = axios.create({
-  baseURL: `http://localhost:3000/api/`,
-});
+import expenseService from "../services/expense.service";
+
 
 const initialState = {
   expenses: [],
@@ -13,35 +11,25 @@ const initialState = {
 
 export const fetchExpenses = createAsyncThunk(
   "expenses/fetchExpenses",
-  async (userID) => {
+  async () => {
     console.log("fetching");
-    const response = await api.get("expenses/" + userID);
-    return response.data;
+    const response = await expenseService.fetchExpenses();
+    return response;
   }
 );
 
 export const addExpense = createAsyncThunk(
   "expenses/addExpense",
-  async (obj) => {
-    console.log("here");
-    console.log(obj);
-    let body = {
-      name: obj.name,
-      cost: obj.cost,
-      type: obj.type,
-    };
-    console.log(obj.userID);
-    const response = await api.post("expenses/" + obj.userID, body);
-    return response.data;
+  async (expense) => {
+    const response = await expenseService.addExpense(expense);
+    return response;
   }
 );
 export const deleteExpense = createAsyncThunk(
   "expenses/deleteExpense",
-  async (object) => {
-    var response = await api.delete(
-      "expenses/" + object.userID + "/" + object._id
-    );
-    return response.data;
+  async (expenseID) => {
+    const response = await expenseService.deleteExpense(expenseID);
+    return expenseID;
   }
 );
 
