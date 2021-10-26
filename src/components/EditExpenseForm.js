@@ -17,7 +17,7 @@ import FormLabel from "@mui/material/FormLabel";
 import "../styles/expenseForm/expenseForm.css";
 import "../styles/editexpenseform/editExpenseForm.css";
 
-export function EditExpenseForm() {
+export function EditExpenseForm(props) {
   const [radioValue, setRadioValue] = useState("");
   const [value, setValue] = useState(1);
   const [name, setName] = useState("");
@@ -33,6 +33,10 @@ export function EditExpenseForm() {
       };
       apiCall(expense);
     }
+  };
+
+  const onCancel = () => {
+    props.setMode(false);
   };
   async function apiCall(body) {
     try {
@@ -94,8 +98,7 @@ export function EditExpenseForm() {
             Edit Expense
           </Button>
           <Button
-            disabled={name.length > 0 ? false : true}
-            onClick={onSubmit}
+            onClick={onCancel}
             variant="outlined"
             color="error"
           >

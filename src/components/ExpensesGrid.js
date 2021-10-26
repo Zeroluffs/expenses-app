@@ -7,10 +7,12 @@ import {
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { selectAllExpenses } from "../slices/expenses";
 import { deleteExpense } from "../slices/expenses";
+import { EditExpenseForm } from "./EditExpenseForm";
 
-export function ExpensesGrid() {
+export function ExpensesGrid(props) {
   const dispatch = useDispatch();
 
   const test = useSelector(selectAllExpenses);
@@ -29,6 +31,9 @@ export function ExpensesGrid() {
     },
     []
   );
+  const editExpense = useCallback((id) => () => {
+    props.setMode(true);
+  });
   useEffect(() => {
     setData(test);
   }, [test]);
@@ -59,9 +64,14 @@ export function ExpensesGrid() {
           label="Delete"
           onClick={deleteUser(params.row)}
         />,
+        <GridActionsCellItem
+          icon={<EditIcon />}
+          label="Edit"
+          onClick={editExpense(params.row)}
+        />,
       ],
     },
-    [deleteUser],
+    [deleteUser, editExpense],
   ];
 
   return (

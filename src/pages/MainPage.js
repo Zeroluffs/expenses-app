@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Budget } from "../components/Budget";
 import { Remaining } from "../components/Remaining";
 import { Spent } from "../components/Spent";
@@ -11,6 +11,7 @@ import { fetchExpenses } from "../slices/expenses";
 import { ExpensesGrid } from "../components/ExpensesGrid";
 import { EditExpenseForm } from "../components/EditExpenseForm";
 export function MainPage() {
+  const [editMode, setEditMode] = useState(false);
   const dispatch = useDispatch();
 
   const user = useContext(AuthContext);
@@ -32,9 +33,13 @@ export function MainPage() {
           <Remaining></Remaining>
         </Grid>
       </Grid>
-      <AddExpenseForm />
-      <EditExpenseForm />
-      <ExpensesGrid></ExpensesGrid>
+
+      {editMode ? (
+        <EditExpenseForm setMode={(mode) => setEditMode(mode)} />
+      ) : (
+        <AddExpenseForm />
+      )}
+      <ExpensesGrid setMode={(mode) => setEditMode(mode)}></ExpensesGrid>
     </Fragment>
   );
 }
