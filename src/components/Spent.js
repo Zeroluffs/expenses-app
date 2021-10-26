@@ -7,10 +7,15 @@ import { selectAllExpenses } from "../slices/expenses";
 import { useDispatch, useSelector } from "react-redux";
 
 export function Spent() {
-  const expenses = useSelector(selectAllExpenses);
-  const totalSpent = expenses.reduce((total, item) => {
+  let expenses = useSelector(selectAllExpenses);
+  const currencyFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  let totalSpent = expenses.reduce((total, item) => {
     return (total += item.cost);
   }, 0);
+  totalSpent = currencyFormatter.format(Number(totalSpent));
   return (
     <Box
       border={1}
@@ -24,7 +29,7 @@ export function Spent() {
       fontSize={18}
     >
       <Typography variant="h6" style={{ fontWeight: "600" }}>
-        {totalSpent}
+        Spent: {totalSpent}
       </Typography>
     </Box>
   );

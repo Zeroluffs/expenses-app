@@ -32,14 +32,26 @@ export function ExpensesGrid() {
   useEffect(() => {
     setData(test);
   }, [test]);
+  const currencyFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
+  const usdPrice = {
+    headerName: "Cost",
+    type: "number",
+    width: 130,
+    valueFormatter: ({ value }) => currencyFormatter.format(Number(value)),
+    cellClassName: "font-tabular-nums",
+  };
   const columns = [
-    { field: "name", headerName: "Name", width: 200 },
-    { field: "cost", headerName: "Cost", width: 200 },
+    { field: "name", headerName: "Expense", width: 200 },
+    { field: "cost", ...usdPrice },
     { field: "type", headerName: "Type", width: 200 },
     {
       field: "actions",
       type: "actions",
-      headerName:"Actions",
+      headerName: "Actions",
       width: 80,
       getActions: (params) => [
         <GridActionsCellItem
@@ -53,7 +65,7 @@ export function ExpensesGrid() {
   ];
 
   return (
-    <div style={{ height: 300, width: "100%" }}>
+    <div style={{ height: 400, width: "100%" }}>
       <DataGrid rows={test} columns={columns} />
     </div>
   );

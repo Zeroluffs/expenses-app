@@ -77,9 +77,9 @@ export function AddExpenseForm() {
           value={radioValue}
           onChange={handleRadioChange}
         >
-          <FormControlLabel value="bills" control={<Radio />} label="Bills" />
+          <FormControlLabel value="Bills" control={<Radio />} label="Bills" />
           <FormControlLabel
-            value="subscription"
+            value="Subscription"
             control={<Radio />}
             label="Subscription"
           />
