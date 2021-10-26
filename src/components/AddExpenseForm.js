@@ -53,7 +53,7 @@ export function AddExpenseForm() {
   };
   return (
     <div className="expenseForm">
-      <FormControl sx={{ m: 3 }} variant="standard">
+      <FormControl sx={{ m: 6 }} variant="standard">
         <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
         <Input
           value={value}
