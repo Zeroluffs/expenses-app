@@ -9,6 +9,7 @@ import jwt_decode from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExpenses } from "../slices/expenses";
 import { ExpensesGrid } from "../components/ExpensesGrid";
+import { EditExpenseForm } from "../components/EditExpenseForm";
 export function MainPage() {
   const dispatch = useDispatch();
 
@@ -32,6 +33,7 @@ export function MainPage() {
         </Grid>
       </Grid>
       <AddExpenseForm />
+      <EditExpenseForm />
       <ExpensesGrid></ExpensesGrid>
     </Fragment>
   );
