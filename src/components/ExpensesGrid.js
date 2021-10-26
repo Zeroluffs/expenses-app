@@ -35,10 +35,12 @@ export function ExpensesGrid() {
   const columns = [
     { field: "name", headerName: "Name", width: 200 },
     { field: "cost", headerName: "Cost", width: 200 },
+    { field: "type", headerName: "Type", width: 200 },
     {
       field: "actions",
       type: "actions",
-      width: 60,
+      headerName:"Actions",
+      width: 80,
       getActions: (params) => [
         <GridActionsCellItem
           icon={<DeleteIcon />}

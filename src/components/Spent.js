@@ -3,8 +3,14 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { fontWeight } from "@mui/system";
+import { selectAllExpenses } from "../slices/expenses";
+import { useDispatch, useSelector } from "react-redux";
 
 export function Spent() {
+  const expenses = useSelector(selectAllExpenses);
+  const totalSpent = expenses.reduce((total, item) => {
+    return (total += item.cost);
+  }, 0);
   return (
     <Box
       border={1}
@@ -18,7 +24,7 @@ export function Spent() {
       fontSize={18}
     >
       <Typography variant="h6" style={{ fontWeight: "600" }}>
-        Spent: $2,000,000 COP
+        {totalSpent}
       </Typography>
     </Box>
   );

@@ -9,9 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthContext } from "../context/auth";
 import { addExpense } from "../slices/expenses";
 import jwt_decode from "jwt-decode";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormLabel from "@mui/material/FormLabel";
 import "../styles/expenseForm/expenseForm.css";
 
 export function AddExpenseForm() {
+  const [radioValue, setRadioValue] = useState("");
   const [value, setValue] = useState(1);
   const [name, setName] = useState("");
   const dispatch = useDispatch();
@@ -22,7 +28,7 @@ export function AddExpenseForm() {
       const expense = {
         name: name,
         cost: value,
-        type: "sub",
+        type: radioValue,
       };
       apiCall(expense);
     }
@@ -42,6 +48,9 @@ export function AddExpenseForm() {
       console.log(error);
     }
   }
+  const handleRadioChange = (event) => {
+    setRadioValue(event.target.value);
+  };
   return (
     <div className="expenseForm">
       <FormControl sx={{ m: 3 }} variant="standard">
@@ -62,6 +71,19 @@ export function AddExpenseForm() {
           onChange={(event) => setName(event.target.value)}
           variant="standard"
         />
+        <RadioGroup
+          aria-label="quiz"
+          name="quiz"
+          value={radioValue}
+          onChange={handleRadioChange}
+        >
+          <FormControlLabel value="bills" control={<Radio />} label="Bills" />
+          <FormControlLabel
+            value="subscription"
+            control={<Radio />}
+            label="Subscription"
+          />
+        </RadioGroup>
         <Button
           disabled={name.length > 0 ? false : true}
           onClick={onSubmit}
