@@ -18,18 +18,18 @@ export function Spent() {
   totalSpent = currencyFormatter.format(Number(totalSpent));
   return (
     <Box
-      border={1}
-      borderRadius={1}
       height={100}
       display="flex"
       justifyContent="center"
       alignItems="center"
-      color="#206E20"
-      bgcolor="#3ECA3E"
       fontSize={18}
     >
-      <Typography variant="h6" style={{ fontWeight: "600" }}>
-        Spent: {totalSpent}
+      <Typography variant="subtitle1">
+        Spent: {"\n"}
+        <Typography variant="subtitle1" style={{ fontWeight: "600" }}>
+          {" "}
+          {totalSpent}
+        </Typography>
       </Typography>
     </Box>
   );

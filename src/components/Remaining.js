@@ -23,18 +23,17 @@ export function Remaining() {
 
   return (
     <Box
-      border={1}
-      borderRadius={1}
       height={100}
       display="flex"
       justifyContent="center"
       alignItems="center"
-      color="#5A1010"
-      bgcolor="#FF5050"
       fontSize={18}
     >
-      <Typography variant="h6" style={{ fontWeight: "600" }}>
-        Remaining: {remaining}
+      <Typography variant="subtitle1">
+        Remaining:{" "}
+        <Typography variant="subtitle1" style={{ fontWeight: "600" }}>
+          {remaining}
+        </Typography>
       </Typography>
     </Box>
   );

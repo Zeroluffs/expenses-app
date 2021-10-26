@@ -16,18 +16,18 @@ export function Budget() {
   budget = currencyFormatter.format(Number(budget));
   return (
     <Box
-      border={1}
-      borderRadius={1}
       height={100}
       display="flex"
       justifyContent="center"
       alignItems="center"
-      bgcolor="#5572E8"
-      color="#182D81"
       fontSize={18}
     >
-      <Typography variant="h6" style={{ fontWeight: "600" }}>
-        Budget: {budget}
+      <Typography variant="subtitle1">
+        Budget: {"\n"}
+        <Typography variant="subtitle1" style={{ fontWeight: "600" }}>
+          {" "}
+          {budget}
+        </Typography>
       </Typography>
     </Box>
   );
