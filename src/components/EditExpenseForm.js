@@ -31,10 +31,14 @@ export function EditExpenseForm(props) {
         cost: value,
         type: radioValue,
       };
-      apiCall(expense);
+      //   apiCall(expense);
+      console.log("this will be sent");
+      console.log(expense);
+      props.setMode(false);
     }
   };
-
+  console.log("showing prop");
+  console.log(props.expenseToEdit);
   const onCancel = () => {
     props.setMode(false);
   };
@@ -61,14 +65,16 @@ export function EditExpenseForm(props) {
       <FormControl sx={{ m: 6 }} variant="standard">
         <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
         <Input
-          value={value}
+          //   value={value}
+          defaultValue={props.expenseToEdit.cost}
           type="number"
           id="standard-adornment-amount"
           onChange={(event) => setValue(event.target.value)}
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
         />
         <TextField
-          value={name}
+          //   value={name}
+          defaultValue={props.expenseToEdit.name}
           id="standard-multiline-flexible"
           label="Expense Name"
           multiline
@@ -79,7 +85,8 @@ export function EditExpenseForm(props) {
         <RadioGroup
           aria-label="quiz"
           name="quiz"
-          value={radioValue}
+          defaultValue={props.expenseToEdit.type}
+          //   value={radioValue}
           onChange={handleRadioChange}
         >
           <FormControlLabel value="Bills" control={<Radio />} label="Bills" />
@@ -97,11 +104,7 @@ export function EditExpenseForm(props) {
           >
             Edit Expense
           </Button>
-          <Button
-            onClick={onCancel}
-            variant="outlined"
-            color="error"
-          >
+          <Button onClick={onCancel} variant="outlined" color="error">
             Cancel
           </Button>
         </div>

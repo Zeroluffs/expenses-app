@@ -10,10 +10,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchExpenses } from "../slices/expenses";
 import { ExpensesGrid } from "../components/ExpensesGrid";
 import { EditExpenseForm } from "../components/EditExpenseForm";
+
 export function MainPage() {
   const [editMode, setEditMode] = useState(false);
   const dispatch = useDispatch();
-
+  const [expenseToEdit, setExpenseToEdit] = useState({
+    _id: "",
+    name: "",
+    cost: 1,
+    type: "",
+  });
   const user = useContext(AuthContext);
   useEffect(() => {
     var decoded = jwt_decode(user.user.token);
@@ -35,11 +41,17 @@ export function MainPage() {
       </Grid>
 
       {editMode ? (
-        <EditExpenseForm setMode={(mode) => setEditMode(mode)} />
+        <EditExpenseForm
+          setMode={(mode) => setEditMode(mode)}
+          expenseToEdit={expenseToEdit}
+        />
       ) : (
         <AddExpenseForm />
       )}
-      <ExpensesGrid setMode={(mode) => setEditMode(mode)}></ExpensesGrid>
+      <ExpensesGrid
+        setMode={(mode) => setEditMode(mode)}
+        setExpense={(expenseToEdit) => setExpenseToEdit(expenseToEdit)}
+      ></ExpensesGrid>
     </Fragment>
   );
 }

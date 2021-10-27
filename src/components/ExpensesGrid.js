@@ -33,6 +33,12 @@ export function ExpensesGrid(props) {
   );
   const editExpense = useCallback((id) => () => {
     props.setMode(true);
+    props.setExpense({
+      _id: id._id,
+      name: id.name,
+      cost: id.cost,
+      type: id.type,
+    });
   });
   useEffect(() => {
     setData(test);
