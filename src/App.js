@@ -8,12 +8,14 @@ import store from "./store";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { AuthProvider } from "./context/auth";
+import { NavBar } from "./components/AppBar";
 
 function App() {
   return (
     <AuthProvider>
       <Provider store={store}>
         <Router>
+          <NavBar />
           <Route exact path="/" component={Login} />
           <Route exact path="/mainpage" component={MainPage} />
         </Router>

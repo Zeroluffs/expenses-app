@@ -11,6 +11,7 @@ import { fetchExpenses } from "../slices/expenses";
 import { ExpensesGrid } from "../components/ExpensesGrid";
 import { EditExpenseForm } from "../components/EditExpenseForm";
 import { NavBar } from "../components/AppBar";
+import "../styles/mainpage/mainpage.css";
 
 export function MainPage() {
   const [editMode, setEditMode] = useState(false);
@@ -28,8 +29,7 @@ export function MainPage() {
   }, []);
 
   return (
-    <Fragment>
-      <NavBar />
+    <div className="mainPageComponentDivs">
       <Grid justifyContent="center" container spacing={1}>
         <Grid item xs={4}>
           <Budget></Budget>
@@ -54,6 +54,6 @@ export function MainPage() {
         setMode={(mode) => setEditMode(mode)}
         setExpense={(expenseToEdit) => setExpenseToEdit(expenseToEdit)}
       ></ExpensesGrid>
-    </Fragment>
+    </div>
   );
 }
