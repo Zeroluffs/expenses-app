@@ -13,12 +13,10 @@ function App() {
   return (
     <AuthProvider>
       <Provider store={store}>
-        <div>
-          <Router>
-            <Route exact path="/" component={Login} />
-            <Route exact path="/mainpage" component={MainPage} />
-          </Router>
-        </div>
+        <Router>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/mainpage" component={MainPage} />
+        </Router>
       </Provider>
     </AuthProvider>
   );

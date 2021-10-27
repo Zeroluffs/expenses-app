@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchExpenses } from "../slices/expenses";
 import { ExpensesGrid } from "../components/ExpensesGrid";
 import { EditExpenseForm } from "../components/EditExpenseForm";
+import { NavBar } from "../components/AppBar";
 
 export function MainPage() {
   const [editMode, setEditMode] = useState(false);
@@ -28,6 +29,7 @@ export function MainPage() {
 
   return (
     <Fragment>
+      <NavBar />
       <Grid justifyContent="center" container spacing={1}>
         <Grid item xs={4}>
           <Budget></Budget>
