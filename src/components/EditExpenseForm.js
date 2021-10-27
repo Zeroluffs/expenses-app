@@ -16,7 +16,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormLabel from "@mui/material/FormLabel";
 import "../styles/expenseForm/expenseForm.css";
 import "../styles/editexpenseform/editExpenseForm.css";
-
+import { expenseUpdated } from "../slices/expenses";
 export function EditExpenseForm(props) {
   const [radioValue, setRadioValue] = useState("");
   const [value, setValue] = useState(1);
@@ -25,32 +25,30 @@ export function EditExpenseForm(props) {
   const context = useContext(AuthContext);
 
   const onSubmit = async () => {
-    if ((name.length > 0) & (value > 0)) {
+    if (name.length > 0 || value > 1 || radioValue.length > 0) {
       const expense = {
-        name: name,
-        cost: value,
-        type: radioValue,
+        name: name.length > 0 ? name : props.expenseToEdit.name,
+        cost: value > 0 ? value : props.expenseToEdit.value,
+        type: radioValue.length > 0 ? radioValue : props.expenseToEdit.type,
+        _id: props.expenseToEdit._id,
       };
-      //   apiCall(expense);
-      console.log("this will be sent");
-      console.log(expense);
+      apiCall(expense);
       props.setMode(false);
     }
   };
-  console.log("showing prop");
-  console.log(props.expenseToEdit);
   const onCancel = () => {
     props.setMode(false);
   };
   async function apiCall(body) {
     try {
       let expense = {
+        _id: body._id,
         name: body.name,
         cost: body.cost,
         type: body.type,
       };
 
-      const response = await dispatch(addExpense(expense)).unwrap();
+      dispatch(expenseUpdated(expense));
       setValue(1);
       setName("");
     } catch (error) {
@@ -98,7 +96,15 @@ export function EditExpenseForm(props) {
         </RadioGroup>
         <div className="editButtons">
           <Button
-            disabled={name.length > 0 ? false : true}
+            disabled={
+              name.length > 0
+                ? false
+                : true && value > 1
+                ? false
+                : true && radioValue.length > 0
+                ? false
+                : true
+            }
             onClick={onSubmit}
             variant="outlined"
           >

@@ -26,9 +26,14 @@ const deleteExpense = async (expenseID) => {
   );
   return response.data;
 };
+const updateExpense = async (expenseID, expense) => {
+  var response = await api.patch("expenses/" + expenseID, expense);
+  return response.data;
+};
 const expenseService = {
   addExpense,
   fetchExpenses,
-  deleteExpense
+  deleteExpense,
+  updateExpense,
 };
 export default expenseService;

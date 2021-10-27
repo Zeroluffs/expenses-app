@@ -41,6 +41,12 @@ const expensesSlice = createSlice({
     },
     expenseUpdated(state, action) {
       const { name, cost, type, _id } = action.payload;
+      let expense = {
+        name: name,
+        cost: cost,
+        type: type,
+      };
+      var response = expenseService.updateExpense(_id, expense);
       const existingExpense = state.expenses.find(
         (expense) => expense._id === _id
       );
