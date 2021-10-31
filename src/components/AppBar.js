@@ -8,12 +8,27 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { AuthContext } from "../context/auth";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { reset } from "../slices/expenses";
 
 export function NavBar() {
+  const dispatch = useDispatch();
+
   const history = useHistory();
   const { user, logout } = useContext(AuthContext);
+  const handleLogin = () => {
+    history.push({
+      pathname: "/",
+    });
+  };
+  const handleRegister = () => {
+    history.push({
+      pathname: "/register",
+    });
+  };
   const handleLogout = () => {
     logout();
+    dispatch(reset());
     history.push({
       pathname: "/",
     });
@@ -56,8 +71,12 @@ export function NavBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Expenses
           </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Register</Button>
+          <Button color="inherit" onClick={handleLogin}>
+            Login
+          </Button>
+          <Button color="inherit" onClick={handleRegister}>
+            Register
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>

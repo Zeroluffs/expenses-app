@@ -1,16 +1,13 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Budget } from "../components/Budget";
 import { Remaining } from "../components/Remaining";
 import { Spent } from "../components/Spent";
 import Grid from "@mui/material/Grid";
 import { AddExpenseForm } from "../components/AddExpenseForm";
-import { AuthContext } from "../context/auth";
-import jwt_decode from "jwt-decode";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchExpenses } from "../slices/expenses";
 import { ExpensesGrid } from "../components/ExpensesGrid";
 import { EditExpenseForm } from "../components/EditExpenseForm";
-import { NavBar } from "../components/AppBar";
 import "../styles/mainpage/mainpage.css";
 
 export function MainPage() {
@@ -22,7 +19,6 @@ export function MainPage() {
     cost: 1,
     type: "",
   });
-  const user = useContext(AuthContext);
   useEffect(() => {
     dispatch(fetchExpenses()).unwrap();
   }, []);

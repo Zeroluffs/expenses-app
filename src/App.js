@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { AuthProvider } from "./context/auth";
 import { NavBar } from "./components/AppBar";
+import { Register } from "./components/Register";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <NavBar />
           <Route exact path="/" component={Login} />
           <Route exact path="/mainpage" component={MainPage} />
+          <Route exact path="/register" component={Register} />
         </Router>
       </Provider>
     </AuthProvider>
