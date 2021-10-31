@@ -1,12 +1,7 @@
 import React from "react";
-import { ExpenseItem } from "./ExpenseItem";
-import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
-import Typography from "@mui/material/Typography";
-import CommentIcon from "@mui/icons-material/Comment";
 import IconButton from "@mui/material/IconButton";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import Chip from "@mui/material/Chip";

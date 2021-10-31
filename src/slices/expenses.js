@@ -1,4 +1,3 @@
-import { CollectionsBookmarkOutlined } from "@mui/icons-material";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import expenseService from "../services/expense.service";
 
@@ -27,7 +26,7 @@ export const addExpense = createAsyncThunk(
 export const deleteExpense = createAsyncThunk(
   "expenses/deleteExpense",
   async (expenseID) => {
-    const response = await expenseService.deleteExpense(expenseID);
+    await expenseService.deleteExpense(expenseID);
     return expenseID;
   }
 );
@@ -46,7 +45,7 @@ const expensesSlice = createSlice({
         cost: cost,
         type: type,
       };
-      var response = expenseService.updateExpense(_id, expense);
+      expenseService.updateExpense(_id, expense);
       const existingExpense = state.expenses.find(
         (expense) => expense._id === _id
       );

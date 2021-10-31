@@ -1,16 +1,10 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import {
-  DataGrid,
-  GridRowsProp,
-  GridColDef,
-  GridActionsCellItem,
-} from "@mui/x-data-grid";
+import React, { useEffect, useState, useCallback } from "react";
+import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { selectAllExpenses } from "../slices/expenses";
 import { deleteExpense } from "../slices/expenses";
-import { EditExpenseForm } from "./EditExpenseForm";
 
 export function ExpensesGrid(props) {
   const dispatch = useDispatch();
@@ -22,7 +16,7 @@ export function ExpensesGrid(props) {
       const apiCall = async (expenseID) => {
         try {
           console.log("deleting");
-          const response = await dispatch(deleteExpense(expenseID)).unwrap();
+          await dispatch(deleteExpense(expenseID)).unwrap();
         } catch (error) {
           console.log(error);
         }
@@ -33,12 +27,15 @@ export function ExpensesGrid(props) {
   );
   const editExpense = useCallback((id) => () => {
     props.setMode(true);
-    props.setExpense({
-      _id: id._id,
-      name: id.name,
-      cost: id.cost,
-      type: id.type,
-    });
+    props.setExpense(
+      {
+        _id: id._id,
+        name: id.name,
+        cost: id.cost,
+        type: id.type,
+      },
+      []
+    );
   });
   useEffect(() => {
     setData(test);
