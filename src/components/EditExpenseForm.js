@@ -28,7 +28,7 @@ export function EditExpenseForm(props) {
     if (name.length > 0 || value > 1 || radioValue.length > 0) {
       const expense = {
         name: name.length > 0 ? name : props.expenseToEdit.name,
-        cost: value > 0 ? value : props.expenseToEdit.value,
+        cost: value > 1 ? value : props.expenseToEdit.cost,
         type: radioValue.length > 0 ? radioValue : props.expenseToEdit.type,
         _id: props.expenseToEdit._id,
       };
