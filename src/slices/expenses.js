@@ -10,7 +10,6 @@ const initialState = {
 export const fetchExpenses = createAsyncThunk(
   "expenses/fetchExpenses",
   async () => {
-    console.log("fetching");
     const response = await expenseService.fetchExpenses();
     return response;
   }
@@ -51,7 +50,7 @@ const expensesSlice = createSlice({
       );
       if (existingExpense) {
         existingExpense.name = name;
-        existingExpense.cost = cost;
+        existingExpense.cost = parseInt(cost);
         existingExpense.type = type;
       }
     },

@@ -47,7 +47,6 @@ export function EditExpenseForm(props) {
         cost: body.cost,
         type: body.type,
       };
-
       dispatch(expenseUpdated(expense));
       setValue(1);
       setName("");

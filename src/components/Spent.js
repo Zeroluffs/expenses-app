@@ -12,9 +12,11 @@ export function Spent() {
     style: "currency",
     currency: "USD",
   });
-  let totalSpent = expenses.reduce((total, item) => {
-    return (total += item.cost);
-  }, 0);
+  let initialValue = 0;
+  let totalSpent = 0;
+  totalSpent = expenses.reduce((previousValue, item) => {
+    return previousValue + item.cost;
+  }, initialValue);
   totalSpent = currencyFormatter.format(Number(totalSpent));
   return (
     <Box
