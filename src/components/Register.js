@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { AuthContext } from "../context/auth";
 const api = axios.create({
-  baseURL: `http://localhost:3000/api`,
+  baseURL: `https://myexpenses98-app.herokuapp.com/api`,
 });
 export function Register(props) {
   const context = useContext(AuthContext);

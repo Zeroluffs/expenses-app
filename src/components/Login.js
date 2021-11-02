@@ -5,7 +5,7 @@ import { AuthContext } from "../context/auth";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 const api = axios.create({
-  baseURL: `http://localhost:3000/api`,
+  baseURL: `https://myexpenses98-app.herokuapp.com/api`,
 });
 export function Login() {
   const history = useHistory();
