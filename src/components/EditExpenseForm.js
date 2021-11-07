@@ -68,6 +68,7 @@ export function EditExpenseForm(props) {
           id="standard-adornment-amount"
           onChange={(event) => setValue(event.target.value)}
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
+          autoFocus={true}
         />
         <TextField
           //   value={name}

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form } from "semantic-ui-react";
 import { AuthContext } from "../context/auth";
@@ -14,7 +14,6 @@ export function Login() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-
   const [state, setState] = React.useState({
     username: "",
     password: "",
