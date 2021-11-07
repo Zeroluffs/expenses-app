@@ -1,9 +1,8 @@
 import React from "react";
-import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { selectAllExpenses } from "../slices/expenses";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
 
 export function Remaining() {

@@ -6,8 +6,8 @@ import Grid from "@mui/material/Grid";
 import { AddExpenseForm } from "../components/AddExpenseForm";
 import { useDispatch } from "react-redux";
 import { fetchExpenses } from "../slices/expenses";
-import { ExpensesGrid } from "../components/ExpensesGrid";
 import { EditExpenseForm } from "../components/EditExpenseForm";
+import { ExpensesList } from "../components/ExpensesList";
 import "../styles/mainpage/mainpage.css";
 
 export function MainPage() {
@@ -21,6 +21,7 @@ export function MainPage() {
   });
   useEffect(() => {
     dispatch(fetchExpenses()).unwrap();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -45,10 +46,10 @@ export function MainPage() {
       ) : (
         <AddExpenseForm />
       )}
-      <ExpensesGrid
+      <ExpensesList
         setMode={(mode) => setEditMode(mode)}
         setExpense={(expenseToEdit) => setExpenseToEdit(expenseToEdit)}
-      ></ExpensesGrid>
+      ></ExpensesList>
     </div>
   );
 }

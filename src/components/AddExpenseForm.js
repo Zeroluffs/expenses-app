@@ -56,6 +56,7 @@ export function AddExpenseForm() {
       <FormControl sx={{ m: 6 }} variant="standard">
         <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
         <Input
+          autoFocus={true}
           value={value}
           type="number"
           id="standard-adornment-amount"
