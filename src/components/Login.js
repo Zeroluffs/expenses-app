@@ -25,11 +25,11 @@ export function Login() {
       [event.target.name]: value,
     });
   };
-  const onSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = (e) => {
+    e.preventDefault();
     const userInfo = {
-      username: state.username,
-      password: state.password,
+      username: e.target.elements.username?.value,
+      password: e.target.elements.password?.value,
     };
     setLoading(true);
 
@@ -58,40 +58,47 @@ export function Login() {
   };
   return (
     <div>
-      <div className="form-container">
-        <Form onSubmit={onSubmit}>
-          <h1>Login</h1>
-          <Form.Input
-            label="Username"
-            placeholder="Username.."
-            name="username"
-            type="text"
-            //   value={values.username}
-            error={errors.username ? true : false}
-            onChange={onChange}
-          />
-          <Form.Input
-            label="Password"
-            placeholder="Password.."
-            name="password"
-            type="password"
-            //   value={values.password}
-            error={errors.password ? true : false}
-            onChange={onChange}
-          />
-          <Button type="submit" primary>
-            Login
-          </Button>
-        </Form>
-        {Object.keys(errors).length > 0 && (
-          <div className="ui error message">
-            <ul className="list">
-              {Object.values(errors).map((value) => (
-                <li key={value}>{value}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+      <div class="flex items-center justify-center min-h-screen bg-white-100">
+        <div class="px-20 py-20 mt-4 text-left  bg-white shadow-lg">
+          <h3 class="text-2xl font-bold text-center">Login</h3>
+          <form onSubmit={onSubmit}>
+            <div>
+              <label htmlFor="username" class="block">
+                Username
+              </label>
+              <input
+                autoFocus
+                type="text"
+                id="username"
+                placeholder="Username"
+                error={errors.username ? true : false}
+                onChange={onChange}
+                class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+              />
+            </div>
+            <div class="mt-4">
+              <label htmlFor="password" class="block">
+                Password
+              </label>
+              <input
+                type="password"
+                placeholder="Password"
+                id="password"
+                error={errors.password ? true : false}
+                onChange={onChange}
+                class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+              />
+            </div>
+            <div class="flex items-baseline justify-between">
+              <button class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">
+                Login
+              </button>
+              <a href="#" class="text-sm text-blue-600 hover:underline">
+                Forgot password?
+              </a>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
