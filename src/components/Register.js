@@ -82,7 +82,7 @@ export function Register(props) {
               </label>
 
               <input
-                type="text"
+                type="number"
                 id="budget"
                 placeholder="Budget"
                 error={errors.username ? true : false}
