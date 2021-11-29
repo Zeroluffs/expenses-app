@@ -57,48 +57,47 @@ export function Login() {
       });
   };
   return (
-    <div>
-      <div class="flex items-center justify-center min-h-screen bg-white-100">
-        <div class="px-20 py-20 mt-4 text-left  bg-white shadow-lg">
-          <h3 class="text-2xl font-bold text-center">Login</h3>
-          <form onSubmit={onSubmit}>
-            <div>
-              <label htmlFor="username" class="block">
-                Username
-              </label>
-              <input
-                autoFocus
-                type="text"
-                id="username"
-                placeholder="Username"
-                error={errors.username ? true : false}
-                onChange={onChange}
-                class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-              />
-            </div>
-            <div class="mt-4">
-              <label htmlFor="password" class="block">
-                Password
-              </label>
-              <input
-                type="password"
-                placeholder="Password"
-                id="password"
-                error={errors.password ? true : false}
-                onChange={onChange}
-                class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-              />
-            </div>
-            <div class="flex items-baseline justify-between">
-              <button class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">
-                Login
-              </button>
-              <a href="#" class="text-sm text-blue-600 hover:underline">
-                Forgot password?
-              </a>
-            </div>
-          </form>
-        </div>
+    <div className="mx-auto mt-16 md:mt-40 flex items-center justify-center  w-8/12 h-2/3">
+      <div className="text-left">
+        <form onSubmit={onSubmit}>
+          <div>
+            <div className="text-4xl font-bold text-center pb-8 ">Login</div>
+            <label htmlFor="username" className="block font-semibold text-xl">
+              Username
+            </label>
+
+            <input
+              autoFocus
+              type="text"
+              id="username"
+              placeholder="Username"
+              error={errors.username ? true : false}
+              onChange={onChange}
+              className="w-96 px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+            />
+          </div>
+          <div class="mt-4">
+            <label htmlFor="password" className="block  font-semibold text-xl">
+              Password
+            </label>
+            <input
+              type="password"
+              placeholder="Password"
+              id="password"
+              error={errors.password ? true : false}
+              onChange={onChange}
+              class="w-96 px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+            />
+          </div>
+          <div class="flex items-baseline justify-between">
+            <button class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">
+              Login
+            </button>
+            <a href="#" class="text-sm text-blue-600 hover:underline">
+              Forgot password?
+            </a>
+          </div>
+        </form>
       </div>
     </div>
   );
