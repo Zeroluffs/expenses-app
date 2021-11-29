@@ -15,23 +15,28 @@ export function Budget() {
   });
   budget = currencyFormatter.format(Number(budget));
   return (
-    <div>
-      {" "}
-      <Box
-        height={100}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        fontSize={18}
-      >
-        <Typography variant="subtitle1">
-          Budget: {"\n"}
-          <Typography variant="subtitle1" style={{ fontWeight: "600" }}>
-            {" "}
-            {budget}
-          </Typography>
-        </Typography>
-      </Box>
+    <div className="relative bg-red-500">
+      <div className="block bg-red-500">Budget:</div>
+      <div>{budget}</div>
+      <button class="absolute top-0 right-0">Hi</button>
     </div>
+    // <div>
+    //   {" "}
+    //   <Box
+    //     height={100}
+    //     display="flex"
+    //     justifyContent="center"
+    //     alignItems="center"
+    //     fontSize={18}
+    //   >
+    //     <Typography variant="subtitle1">
+    //       Budget: {"\n"}
+    //       <Typography variant="subtitle1" style={{ fontWeight: "600" }}>
+    //         {" "}
+    //         {budget}
+    //       </Typography>
+    //     </Typography>
+    //   </Box>
+    // </div>
   );
 }
