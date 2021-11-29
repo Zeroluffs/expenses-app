@@ -37,6 +37,7 @@ export function Login() {
       .post("/users/login", userInfo)
       .then((res) => {
         if (res.status === 200) {
+          console.log(res);
           const loggedUser = {
             username: res.data.user.username,
             token: res.data.token,
