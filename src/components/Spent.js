@@ -19,20 +19,9 @@ export function Spent() {
   }, initialValue);
   totalSpent = currencyFormatter.format(Number(totalSpent));
   return (
-    <Box
-      height={100}
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      fontSize={18}
-    >
-      <Typography variant="subtitle1">
-        Spent: {"\n"}
-        <Typography variant="subtitle1" style={{ fontWeight: "600" }}>
-          {" "}
-          {totalSpent}
-        </Typography>
-      </Typography>
-    </Box>
+    <div className="">
+      <div className="block  text-xl font-bold">Spent</div>
+      <div className="pt-3 text-3xl font-semibold">{totalSpent}</div>
+    </div>
   );
 }

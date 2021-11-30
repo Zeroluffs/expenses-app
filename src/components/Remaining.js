@@ -18,22 +18,25 @@ export function Remaining() {
     return (total += item.cost);
   }, 0);
   remaining = budget - remaining;
+  let remainingNoFormat = remaining;
   remaining = currencyFormatter.format(Number(remaining));
 
   return (
-    <Box
-      height={100}
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      fontSize={18}
-    >
-      <Typography variant="subtitle1">
-        Remaining:{" "}
-        <Typography variant="subtitle1" style={{ fontWeight: "600" }}>
-          {remaining}
-        </Typography>
-      </Typography>
-    </Box>
+    <div className="">
+      <div className="block  text-xl font-bold">Remaining</div>
+      <div
+        className={
+          "pt-3 text-3xl font-semibold " +
+          (remainingNoFormat == 0 ? 'text-red-400' : "text-black")
+        }
+        // className={
+        //   parseInt(remainingNoFormat) == 0
+        //     ? "pt-3 text-3xl font-semibold text-red-600"
+        //     : "pt-3 text-3xl font-semibold text-blue-400"
+        // }
+      >
+        {remaining}
+      </div>
+    </div>
   );
 }

@@ -21,12 +21,12 @@ export function MainPage() {
   });
   useEffect(() => {
     dispatch(fetchExpenses()).unwrap();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="mainPageComponentDivs">
-      <Grid justifyContent="center" container spacing={1}>
+      {/* <Grid justifyContent="center" container spacing={1}>
         <Grid item xs={4}>
           <Budget></Budget>
         </Grid>
@@ -36,8 +36,18 @@ export function MainPage() {
         <Grid item xs={4}>
           <Remaining></Remaining>
         </Grid>
-      </Grid>
-
+      </Grid> */}
+      <div className="flex justify-evenly mt-11">
+        <div>
+          <Budget />
+        </div>
+        <div>
+          <Spent />
+        </div>
+        <div>
+          <Remaining />
+        </div>
+      </div>
       {editMode ? (
         <EditExpenseForm
           setMode={(mode) => setEditMode(mode)}
