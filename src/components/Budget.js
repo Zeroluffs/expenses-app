@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { AuthContext } from "../context/auth";
 import jwt_decode from "jwt-decode";
+import { EditBudgetModal } from "../components/EditBudgetModal";
 
 export function Budget() {
   var jwtToken = localStorage.getItem("jwtToken");
   var decodedToken = jwt_decode(jwtToken);
+  const [show, setShow] = useState(false);
   let budget = decodedToken.budget;
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -16,6 +18,7 @@ export function Budget() {
   budget = currencyFormatter.format(Number(budget));
   return (
     <div className="relative">
+      <EditBudgetModal onClose={() => setShow(false)} show={show} />
       <div className="block text-xl font-bold">Budget</div>
       <div
         className={
@@ -25,7 +28,12 @@ export function Budget() {
       >
         {budget}
       </div>
-      <button class="absolute top-0  -right-8 lg:-right-20">
+      <button
+        onClick={() => {
+          setShow(true);
+        }}
+        class="absolute top-0  -right-8 lg:-right-20"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"

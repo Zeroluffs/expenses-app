@@ -10,4 +10,6 @@ export function EditBudgetModal(props) {
       ></div>
     );
   };
+
+  return <ShowModal />;
 }
